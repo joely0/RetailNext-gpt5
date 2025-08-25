@@ -3,3 +3,5 @@ openai
 ipython
 tiktoken
 tenacity
+requests
+tqdm
