@@ -142,12 +142,20 @@ def main():
     """, unsafe_allow_html=True)
     
     # Main Interface
-    st.markdown('<h2 class="sub-header">📤 Upload Your Image</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="sub-header">📷 Upload Your Image</h2>', unsafe_allow_html=True)
+    
+    # Upload area with better styling
+    st.markdown("""
+    <div class="upload-area">
+        <h3>📷 Choose a Clothing Image</h3>
+        <p>Upload a clear image of clothing to get AI-powered style recommendations!</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader(
-        "Choose a clothing image",
+        "Choose a clothing image to analyze",
         type=['png', 'jpg', 'jpeg', 'webp'],
-        help="Upload a clear image of clothing to analyze"
+        help="Upload a clear image of clothing to get AI-powered recommendations"
     )
     
     if uploaded_file is not None:
@@ -228,22 +236,6 @@ def main():
                     except Exception as e:
                         st.error(f"Error during analysis: {e}")
                         st.info("Please try with a different image or check your OpenAI API key.")
-    
-    # Demo Information
-    st.markdown('<h2 class="sub-header">🧪 System Status</h2>', unsafe_allow_html=True)
-    
-    st.markdown("""
-    <div class="feature-card">
-        <h3>✅ Working Features</h3>
-        <ul>
-            <li>🖼️ Image upload and processing</li>
-            <li>🤖 GPT-5 Vision analysis</li>
-            <li>🔍 Semantic search with embeddings</li>
-            <li>📊 Fashion database integration</li>
-            <li>🎨 Material Design interface</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
     
     # Footer
     st.markdown("---")
