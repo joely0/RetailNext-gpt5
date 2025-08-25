@@ -32,73 +32,166 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Material Design
+# Custom CSS for Pitch Deck-Inspired Design
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global Styles */
+    .main {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+    
     .main-header {
-        font-size: 2.5rem;
-        font-weight: 300;
-        color: #1976D2;
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
-        margin-bottom: 1rem;
-        font-family: 'Roboto', sans-serif;
+        margin-bottom: 0.5rem;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.02em;
     }
     
     .sub-header {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         font-weight: 400;
-        color: #424242;
-        margin-bottom: 1rem;
-        font-family: 'Roboto', sans-serif;
+        color: #6B7280;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.01em;
+    }
+    
+    .section-header {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #1F2937;
+        margin-bottom: 1.5rem;
+        font-family: 'Inter', sans-serif;
+        letter-spacing: -0.01em;
     }
     
     .feature-card {
         background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin: 1rem 0;
-        border-left: 4px solid #1976D2;
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        margin: 1.5rem 0;
+        border: 1px solid #E5E7EB;
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
     
     .upload-area {
-        border: 2px dashed #1976D2;
-        border-radius: 8px;
-        padding: 2rem;
+        border: 2px dashed #667eea;
+        border-radius: 16px;
+        padding: 3rem 2rem;
         text-align: center;
-        background: #F5F5F5;
-        margin: 1rem 0;
+        background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+        margin: 2rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .upload-area:hover {
+        border-color: #764ba2;
+        background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
     }
     
     .success-message {
-        background: #E8F5E8;
-        color: #2E7D32;
-        padding: 1rem;
-        border-radius: 4px;
-        border-left: 4px solid #4CAF50;
+        background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+        color: #065F46;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #10B981;
+        font-weight: 500;
     }
     
     .info-message {
-        background: #E3F2FD;
-        color: #1976D2;
-        padding: 1rem;
-        border-radius: 4px;
-        border-left: 4px solid #2196F3;
+        background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+        color: #1E40AF;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #3B82F6;
+        font-weight: 500;
     }
     
     .result-card {
         background: white;
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        margin: 0.5rem 0;
-        border-left: 3px solid #4CAF50;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        margin: 0.75rem 0;
+        border: 1px solid #E5E7EB;
+        transition: all 0.2s ease;
+    }
+    
+    .result-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
     
     .loading {
         text-align: center;
-        padding: 2rem;
-        color: #1976D2;
+        padding: 3rem;
+        color: #667eea;
+        font-weight: 500;
+    }
+    
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        font-weight: 600;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    
+    /* Custom button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Footer styling */
+    .footer {
+        text-align: center;
+        color: #6B7280;
+        font-size: 0.9rem;
+        margin-top: 3rem;
+        padding: 2rem 0;
+        border-top: 1px solid #E5E7EB;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -123,7 +216,7 @@ def main():
     
     # Header
     st.markdown('<h1 class="main-header">👔 RetailNext00</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header" style="text-align: center;">AI-Powered Fashion Matching System</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">AI-Powered Fashion Matching System</p>', unsafe_allow_html=True)
     
     # Load data
     with st.spinner("Loading fashion database..."):
@@ -142,13 +235,13 @@ def main():
     """, unsafe_allow_html=True)
     
     # Main Interface
-    st.markdown('<h2 class="sub-header">📷 Upload Your Image</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-header">📷 Upload Your Image</h2>', unsafe_allow_html=True)
     
     # Upload area with better styling
     st.markdown("""
     <div class="upload-area">
-        <h3>📷 Choose a Clothing Image</h3>
-        <p>Upload a clear image of clothing to get AI-powered style recommendations!</p>
+        <h3 style="font-size: 1.5rem; font-weight: 600; color: #1F2937; margin-bottom: 1rem;">📷 Choose a Clothing Image</h3>
+        <p style="font-size: 1.1rem; color: #6B7280; margin: 0;">Upload a clear image of clothing to get AI-powered style recommendations!</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -186,16 +279,31 @@ def main():
                         analysis = analyze_image(encoded_image, unique_subcategories)
                         image_analysis = json.loads(analysis)
                         
-                        st.markdown('<h3 class="sub-header">🔍 AI Analysis Results</h3>', unsafe_allow_html=True)
+                        st.markdown('<h3 class="section-header">🔍 AI Analysis Results</h3>', unsafe_allow_html=True)
                         
-                        # Display analysis results
+                        # Display analysis results with custom styling
                         col1, col2, col3 = st.columns(3)
                         with col1:
-                            st.metric("Category", image_analysis['category'])
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <div class="metric-value">{image_analysis['category']}</div>
+                                <div class="metric-label">Category</div>
+                            </div>
+                            """, unsafe_allow_html=True)
                         with col2:
-                            st.metric("Gender", image_analysis['gender'])
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <div class="metric-value">{image_analysis['gender']}</div>
+                                <div class="metric-label">Gender</div>
+                            </div>
+                            """, unsafe_allow_html=True)
                         with col3:
-                            st.metric("Items Found", len(image_analysis['items']))
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <div class="metric-value">{len(image_analysis['items'])}</div>
+                                <div class="metric-label">Items Found</div>
+                            </div>
+                            """, unsafe_allow_html=True)
                         
                         # Show detected items
                         st.markdown("**Detected Items:**")
@@ -211,7 +319,7 @@ def main():
                             # Find matches
                             matching_items = find_matching_items_with_rag(filtered_items, image_analysis['items'])
                             
-                            st.markdown('<h3 class="sub-header">🎯 Recommended Matches</h3>', unsafe_allow_html=True)
+                            st.markdown('<h3 class="section-header">🎯 Recommended Matches</h3>', unsafe_allow_html=True)
                             
                             # Display matches in a grid
                             cols = st.columns(3)
@@ -238,10 +346,9 @@ def main():
                         st.info("Please try with a different image or check your OpenAI API key.")
     
     # Footer
-    st.markdown("---")
     st.markdown("""
-    <div style="text-align: center; color: #666; font-size: 0.9rem;">
-        Built with ❤️ using Streamlit, OpenAI GPT-5, and Material Design principles
+    <div class="footer">
+        Built with ❤️ using Streamlit, OpenAI GPT-5, and modern design principles
     </div>
     """, unsafe_allow_html=True)
 
