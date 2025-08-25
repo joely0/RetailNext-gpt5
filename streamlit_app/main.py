@@ -32,166 +32,255 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Pitch Deck-Inspired Design
+# Custom CSS matching RetailNext website design
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Global Styles */
+    /* Global Styles - Sophisticated website design */
     .main {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #ffffff;
         min-height: 100vh;
     }
     
-    .main-header {
-        font-size: 3.5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    /* Header section - Dark, sophisticated */
+    .header-section {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        padding: 3rem 0;
+        margin: -2rem -2rem 3rem -2rem;
         text-align: center;
-        margin-bottom: 0.5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .header-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23374151" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.1;
+    }
+    
+    .main-header {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 1rem;
         font-family: 'Inter', sans-serif;
         letter-spacing: -0.02em;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logo-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .logo-image {
+        max-width: 220px;
+        height: auto;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
     }
     
     .sub-header {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 400;
-        color: #6B7280;
+        color: #94a3b8;
         text-align: center;
         margin-bottom: 2rem;
         font-family: 'Inter', sans-serif;
-        letter-spacing: -0.01em;
+        position: relative;
+        z-index: 1;
     }
     
     .section-header {
         font-size: 1.8rem;
         font-weight: 600;
-        color: #1F2937;
-        margin-bottom: 1.5rem;
+        color: #ffffff;
+        margin-bottom: 2rem;
         font-family: 'Inter', sans-serif;
-        letter-spacing: -0.01em;
+        text-align: center;
+    }
+    
+    .content-section {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
     
     .feature-card {
-        background: white;
+        background: rgba(255, 255, 255, 0.08);
         padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 12px;
         margin: 1.5rem 0;
-        border: 1px solid #E5E7EB;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         transition: all 0.3s ease;
     }
     
     .feature-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
     }
     
     .upload-area {
-        border: 2px dashed #667eea;
+        border: 2px dashed rgba(255, 255, 255, 0.3);
         border-radius: 16px;
         padding: 3rem 2rem;
         text-align: center;
-        background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+        background: rgba(255, 255, 255, 0.05);
         margin: 2rem 0;
         transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
     }
     
     .upload-area:hover {
-        border-color: #764ba2;
-        background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 100%);
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
     }
     
     .success-message {
-        background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
-        color: #065F46;
+        background: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
         padding: 1.5rem;
         border-radius: 12px;
-        border-left: 4px solid #10B981;
+        border-left: 4px solid #22c55e;
         font-weight: 500;
+        backdrop-filter: blur(10px);
     }
     
     .info-message {
-        background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
-        color: #1E40AF;
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
         padding: 1.5rem;
         border-radius: 12px;
-        border-left: 4px solid #3B82F6;
+        border-left: 4px solid #3b82f6;
         font-weight: 500;
+        backdrop-filter: blur(10px);
     }
     
     .result-card {
-        background: white;
+        background: rgba(255, 255, 255, 0.08);
         padding: 1.5rem;
         border-radius: 12px;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        margin: 0.75rem 0;
-        border: 1px solid #E5E7EB;
+        margin: 1rem 0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         transition: all 0.2s ease;
     }
     
     .result-card:hover {
+        background: rgba(255, 255, 255, 0.12);
         transform: translateY(-1px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     }
     
     .loading {
         text-align: center;
         padding: 3rem;
-        color: #667eea;
+        color: #94a3b8;
         font-weight: 500;
     }
     
     .metric-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(147, 51, 234, 0.2) 100%);
+        color: #ffffff;
         padding: 1.5rem;
         border-radius: 12px;
         text-align: center;
         font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
     }
     
     .metric-value {
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
+        color: #ffffff;
     }
     
     .metric-label {
         font-size: 0.9rem;
-        opacity: 0.9;
+        color: #94a3b8;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
     
-    /* Custom button styling */
+    /* Custom button styling - Modern and sophisticated */
     .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        color: white;
         border: none;
         border-radius: 12px;
-        padding: 0.75rem 2rem;
+        padding: 1rem 2rem;
         font-weight: 600;
         font-family: 'Inter', sans-serif;
         transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
     }
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.4);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
     }
     
     /* Footer styling */
     .footer {
         text-align: center;
-        color: #6B7280;
+        color: #94a3b8;
         font-size: 0.9rem;
-        margin-top: 3rem;
-        padding: 2rem 0;
-        border-top: 1px solid #E5E7EB;
+        margin-top: 4rem;
+        padding: 3rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Clean, minimal styling for file uploader */
+    .stFileUploader > div {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Streamlit sidebar cleanup */
+    .css-1d391kg {
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.3);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -214,9 +303,23 @@ def encode_image_to_base64(image_file):
 def main():
     """Main Streamlit application."""
     
-    # Header
-    st.markdown('<h1 class="main-header">👔 RetailNext00</h1>', unsafe_allow_html=True)
+    # Header with Logo - Clean and minimal
+    st.markdown('<div class="header-section">', unsafe_allow_html=True)
+    
+    # Display the logo - try white logo first, then fallback
+    white_logo_path = "../data/website/Retailnextlogo-white-new.png"
+    logo_path = "../data/RetailNextlogo.png"
+    
+    if os.path.exists(white_logo_path):
+        st.image(white_logo_path, width=200)
+    elif os.path.exists(logo_path):
+        st.image(logo_path, width=180)
+    else:
+        # Fallback if logo not found
+        st.markdown('<h1 class="main-header">RetailNext00</h1>', unsafe_allow_html=True)
+    
     st.markdown('<p class="sub-header">AI-Powered Fashion Matching System</p>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Load data
     with st.spinner("Loading fashion database..."):
@@ -237,11 +340,11 @@ def main():
     # Main Interface
     st.markdown('<h2 class="section-header">📷 Upload Your Image</h2>', unsafe_allow_html=True)
     
-    # Upload area with better styling
+    # Upload area with clean styling
     st.markdown("""
     <div class="upload-area">
-        <h3 style="font-size: 1.5rem; font-weight: 600; color: #1F2937; margin-bottom: 1rem;">📷 Choose a Clothing Image</h3>
-        <p style="font-size: 1.1rem; color: #6B7280; margin: 0;">Upload a clear image of clothing to get AI-powered style recommendations!</p>
+        <h3 style="font-size: 1.3rem; font-weight: 600; color: #ffffff; margin-bottom: 0.5rem;">Upload a Clothing Image</h3>
+        <p style="font-size: 1rem; color: #94a3b8; margin: 0;">Get AI-powered style recommendations for your outfit</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -312,26 +415,72 @@ def main():
                         
                         # Find matching items
                         with st.spinner("Finding matching items..."):
-                            # Filter data by gender and different category
-                            filtered_items = styles_df.loc[styles_df['gender'].isin([image_analysis['gender'], 'Unisex'])]
-                            filtered_items = filtered_items[filtered_items['articleType'] != image_analysis['category']]
-                            
-                            # Find matches
-                            matching_items = find_matching_items_with_rag(filtered_items, image_analysis['items'])
+                            try:
+                                # Filter data by gender and different category
+                                filtered_items = styles_df.loc[styles_df['gender'].isin([image_analysis['gender'], 'Unisex'])]
+                                filtered_items = filtered_items[filtered_items['articleType'] != image_analysis['category']]
+                                
+                                # Debug info
+                                st.info(f"Found {len(filtered_items)} items to search through")
+                                
+                                # Find matches
+                                matching_items = find_matching_items_with_rag(filtered_items, image_analysis['items'])
+                                
+                                # Debug info
+                                st.info(f"AI found {len(matching_items) if matching_items else 0} matching items")
+                                
+                            except Exception as search_error:
+                                st.error(f"Error during search: {search_error}")
+                                matching_items = []
                             
                             st.markdown('<h3 class="section-header">🎯 Recommended Matches</h3>', unsafe_allow_html=True)
                             
                             # Display matches in a grid
-                            cols = st.columns(3)
-                            for i, item in enumerate(matching_items[:6]):  # Show top 6 matches
-                                with cols[i % 3]:
-                                    st.markdown(f"""
-                                    <div class="result-card">
-                                        <strong>{item['productDisplayName']}</strong><br>
-                                        <small>Category: {item['articleType']}</small><br>
-                                        <small>Color: {item['baseColour']}</small>
-                                    </div>
-                                    """, unsafe_allow_html=True)
+                            if matching_items and len(matching_items) > 0:
+                                cols = st.columns(3)
+                                for i, item in enumerate(matching_items[:6]):  # Show top 6 matches
+                                    with cols[i % 3]:
+                                        try:
+                                            # Get product details
+                                            product_id = item.get('id', 'Unknown')
+                                            product_name = item.get('productDisplayName', 'Product Name Not Available')
+                                            category = item.get('articleType', 'Category Not Available')
+                                            color = item.get('baseColour', 'Color Not Available')
+                                            
+                                            # Try to display the product image
+                                            image_path = f"../data/sample_clothes/sample_images/{product_id}.jpg"
+                                            try:
+                                                st.image(image_path, caption=f"ID: {product_id}", use_container_width=True)
+                                            except:
+                                                # If image not found, show a placeholder
+                                                st.markdown("""
+                                                <div style="text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px;">
+                                                    📷<br>Image Not Available
+                                                </div>
+                                                """, unsafe_allow_html=True)
+                                            
+                                            # Display product information
+                                            st.markdown(f"""
+                                            <div class="result-card">
+                                                <strong>{product_name}</strong><br>
+                                                <small>Category: {category}</small><br>
+                                                <small>Color: {color}</small>
+                                            </div>
+                                            """, unsafe_allow_html=True)
+                                        except Exception as item_error:
+                                            st.markdown(f"""
+                                            <div class="result-card">
+                                                <strong>Product {i+1}</strong><br>
+                                                <small>Error: {str(item_error)}</small>
+                                            </div>
+                                            """, unsafe_allow_html=True)
+                            else:
+                                st.markdown("""
+                                <div class="info-message">
+                                    <strong>No matches found</strong> for the uploaded image. 
+                                    Try uploading a different clothing item.
+                                </div>
+                                """, unsafe_allow_html=True)
                         
                         st.markdown("""
                         <div class="success-message">

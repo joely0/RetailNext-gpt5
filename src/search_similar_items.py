@@ -60,8 +60,8 @@ def find_similar_items(input_embedding, embeddings, threshold=0.5, top_k=2):
     # Sort the filtered similarities by similarity score
     sorted_indices = sorted(filtered_similarities, key=lambda x: x[1], reverse=True)[:top_k]
 
-    # Return the top-k most similar items
-    return sorted_indices
+    # Return just the indices (not the tuples with similarity scores)
+    return [index for index, sim in sorted_indices]
 
 
 def find_matching_items_with_rag(df_items, item_descs):
@@ -75,10 +75,14 @@ def find_matching_items_with_rag(df_items, item_descs):
     similar_items = []
     for desc in item_descs:
         # Generate the embedding for the input item
-        input_embedding = get_embeddings([desc])
+        input_embeddings = get_embeddings([desc])
+        input_embedding = input_embeddings[0]  # Get the first (and only) embedding
 
         # Find the most similar items based on cosine similarity
         similar_indices = find_similar_items(input_embedding, embeddings, threshold=0.6)
     
-        similar_items += [df_items.iloc[i].to_dict() for i in similar_indices]
+        for i in similar_indices:
+            item = df_items.iloc[i]
+            similar_items.append(item.to_dict())
+    
     return similar_items
