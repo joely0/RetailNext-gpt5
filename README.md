@@ -2,8 +2,6 @@
 
 A multimodal fashion recommendation system that analyzes clothing images and suggests matching outfit items using OpenAI's latest GPT-5-mini API and embedding-based similarity search.
 
-Built with clean architecture principles and production-ready structure.
-
 Original cookbook - https://cookbook.openai.com/examples/how_to_combine_gpt4o_with_rag_outfit_assistant
 
 ## Installation & Setup Guide
@@ -21,7 +19,7 @@ source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
 ```
 
-## ▶Usage
+## Usage
 
 ```bash
 # Test your setup
