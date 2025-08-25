@@ -5,3 +5,4 @@ tiktoken
 tenacity
 requests
 tqdm
+streamlit
