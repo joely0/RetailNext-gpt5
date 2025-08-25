@@ -1,8 +1,8 @@
 # RetailNext00
 
-A multimodal fashion recommendation system that analyzes clothing images and suggests matching outfit items using OpenAI's API and embedding-based similarity search.
+A multimodal fashion recommendation system that analyzes clothing images and suggests matching outfit items using OpenAI's latest GPT-5-mini API and embedding-based similarity search.
 
-Built for basic local demo. 
+Built with clean architecture principles and production-ready structure.
 
 Original cookbook - https://cookbook.openai.com/examples/how_to_combine_gpt4o_with_rag_outfit_assistant
 
@@ -24,36 +24,33 @@ pip install -r requirements.txt
 ## ▶Usage
 
 ```bash
-python run_demo.py
+# Test your setup
+python test_setup.py
+
+# Run the main demo
+python scripts/run_demo.py
 ```
 
 ## Folder Structure
 
 ```
 RetailNext00/
-├── main.py
-├── config.py
-├── requirements.txt
+├── src/                           # Core application code
+│   ├── main.py                    # Main entry point
+│   ├── config.py                  # Configuration
+│   ├── analysis.py                # Image analysis
+│   ├── data_loader.py            # Data loading
+│   ├── guardrails.py             # Content validation
+│   ├── image_match.py            # Image matching
+│   └── search_similar_items.py   # Semantic search
 │
-├── match/
-│   ├── image_match.py
-│   └── search_similar_items.py
+├── scripts/                       # Utility scripts
+│   ├── run_demo.py               # Main demo
+│   └── download_sample_images.py # Download images
 │
-├── embeddings/
-│   ├── generate_embeddings.py
-│   └── embed_samples_load.py
-│
-├── utils/
-│   └── guardrails.py
-│
-├── data/
-│   └── sample_clothes/
-│       ├── sample_images/
-│       ├── sample_styles.csv
-│       └── sample_styles_with_embeddings.csv
-│
-├── run_demo.py
-└── README.md
+├── streamlit_app/                 # Web interface
+├── data/                          # Sample data
+└── tests/                         # Test suite
 ```
 
 
