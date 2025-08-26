@@ -48,18 +48,17 @@ def check_match(reference_image_base64, suggested_image_base64):
                 ],
                 }
             ],
-            max_completion_tokens=500,
+            max_completion_tokens=600
         )
-        
         # Extract relevant features from the response
         features = response.choices[0].message.content
         
-        # Check if we got an empty response (this can happen if we hit token limits)
+        # Validate we got a proper response
         if not features or features.strip() == '':
-            return '{"answer": "yes", "reason": "Items appear to be compatible based on style and color coordination."}'
+            return '{"answer": "no", "reason": "Unable to validate compatibility - please try again"}'
         
         return features
         
     except Exception as e:
-        return '{"answer": "error", "reason": "API call failed"}'
+        return '{"answer": "no", "reason": "Validation failed due to technical error"}'
 

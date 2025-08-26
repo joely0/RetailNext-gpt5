@@ -1,0 +1,67 @@
+"""
+analysis.py
+This module defines the `analyze_image` function, which uses OpenAI's GPT-5 mini 
+API to analyze a clothing image and return structured fashion metadata. It provides
+an example input and output prompt (one shot example). The output (JSON format) includes a predefined structure
+including, items, category, gender 
+"""
+
+# 3P Imports
+from openai import OpenAI
+
+# Local Application Imports
+from config import GPT_MODEL
+
+# Initialize OpenAI client
+client = OpenAI()
+
+# Includes example of expected output, to future clarify expected output. 
+
+def analyze_image(image_base64, subcategories):
+    response = client.chat.completions.create(
+        model=GPT_MODEL,
+        messages=[
+            {
+            "role": "user",
+            "content": [
+                {
+                "type": "text",
+                "text": f"""Given an image of clothing, analyze ONLY what is actually visible in the image and generate a JSON output with the following fields: "items", "category", and "gender".
+
+                           CRITICAL: The "items" field should contain ONLY clothing items that are actually visible in the image. Do NOT suggest items that would go well with the clothing. Do NOT add items that are not present.
+
+                           The items field should be a list of the actual clothing pieces visible in the image. Each item should represent a title of an item of clothing that contains the style, color, and gender of the item.
+                           
+                           FORMAT REQUIREMENT: Each item must follow this exact format: "[Color] [Style] [Type] [Gender]" (e.g., "Black Short-Sleeve Button-Up Shirt Men", "Blue Straight-Leg Jeans Men")
+
+                           The category needs to be chosen between the types in this list: {subcategories}.
+                           You have to choose between the genders in this list: [Men, Women, Boys, Girls, Unisex]
+                           
+                           IMPORTANT: If you see only one item of clothing, the items list should contain only that one item. If you see multiple items, list only those visible items.
+
+                           ANTI-HALLUCINATION RULE: Only describe what you can actually see in the image. Do not invent or suggest additional clothing items. If you are unsure about an item, do not include it.
+
+                           Do not include the description of the item in the picture. Do not include the ```json ``` tag in the output.
+
+                           Example Input: An image showing a black leather jacket.
+
+                           Example Output: {{"items": ["Black Leather Jacket Women"], "category": "Jackets", "gender": "Women"}}
+                           
+                           Example Input: An image showing a blue t-shirt and jeans.
+
+                           Example Output: {{"items": ["Blue T-shirt Men", "Blue Straight-Leg Jeans Men"], "category": "Tshirts", "gender": "Men"}}
+                           """,
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{image_base64}",
+                },
+                }
+            ],
+            }
+        ]
+    )
+    # Extract relevant features from the response
+    features = response.choices[0].message.content
+    return features

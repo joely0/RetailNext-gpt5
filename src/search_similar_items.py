@@ -1,7 +1,7 @@
 """
 search_similar_items.py
 Contains functions for generating embeddings using OpenAI (text-embedding-3-large) and retrieving top-matching items
-based on cosine similarity. Forms the retrieval layer in the GPT-4o mini + RAG pipeline.
+based on cosine similarity. Forms the retrieval layer in the GPT-5 mini + RAG pipeline.
 """
 
 # Standard library imports

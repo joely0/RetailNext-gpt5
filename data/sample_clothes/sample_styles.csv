@@ -1,0 +1,16 @@
+id,gender,articleType,baseColour,productDisplayName,usage
+1,Male,Shirts,Blue,Classic Blue Oxford Shirt,Casual
+2,Male,Pants,Black,Black Chino Pants,Formal
+3,Male,Shirts,White,White Dress Shirt,Formal
+4,Female,Dresses,Red,Red Summer Dress,Casual
+5,Female,Tops,Pink,Pink Blouse,Formal
+6,Female,Skirts,Black,Black Pencil Skirt,Formal
+7,Unisex,Jackets,Denim,Denim Jacket,Casual
+8,Unisex,Shoes,White,White Sneakers,Casual
+9,Male,Sweaters,Gray,Gray Wool Sweater,Casual
+10,Female,Jeans,Blue,Blue Skinny Jeans,Casual
+11,Male,Jeans,Blue,Blue Straight Jeans,Casual
+12,Female,Tops,White,White T-Shirt,Casual
+13,Male,Tops,Black,Black Polo Shirt,Casual
+14,Female,Shirts,Striped,Striped Button-Down Shirt,Formal
+15,Male,Shirts,Green,Green Casual Shirt,Casual
