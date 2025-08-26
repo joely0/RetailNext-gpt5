@@ -4,7 +4,7 @@ A multimodal fashion recommendation system that analyzes clothing images and sug
 
 ## 🎯 Features
 
-- **AI Image Analysis**: GPT-5 Vision analyzes clothing images
+- **AI Image Analysis**: GPT-5 mini Vision analyzes clothing images
 - **Semantic Search**: Finds similar items using OpenAI embeddings
 - **Smart Filtering**: Recommends complementary items from different categories
 - **AI Validation**: Guardrails system validates outfit compatibility
@@ -59,7 +59,7 @@ RetailNext-gpt5/
 
 ## 🎨 Built With
 
-- **OpenAI GPT-5**: Image analysis and understanding
+- **OpenAI GPT-5 mini**: Image analysis and understanding
 - **OpenAI Embeddings**: Semantic similarity search
 - **Streamlit**: Web interface
 - **Pandas**: Data manipulation and analysis
