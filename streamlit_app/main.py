@@ -146,7 +146,7 @@ def main():
                                         try:
                                             # Construct image path based on catalog item ID
                                             image_filename = f"{match.get('id', 'unknown')}.jpg"
-                                            image_path = f"../data/sample_clothes/sample_images/{image_filename}"
+                                            image_path = f"data/sample_clothes/sample_images/{image_filename}"
                                             
                                             # Check if image file exists
                                             if os.path.exists(image_path):
@@ -181,13 +181,44 @@ def main():
                                         st.write(f"**Season:** {match.get('season', 'N/A')}")
                                         st.write(f"**Usage:** {match.get('usage', 'N/A')}")
                                         
+                                        # Show why this item was recommended
+                                        if 'similarity_score' in match:
+                                            st.write(f"**Match Score:** {match.get('similarity_score', 'N/A'):.3f}")
+                                            st.info(f"🎯 **Recommended because:** This item has similar style, color, and category characteristics to your uploaded image")
+                                        elif 'score' in match:
+                                            st.write(f"**Match Score:** {match.get('score', 'N/A'):.3f}")
+                                            st.info(f"🎯 **Recommended because:** This item has similar style, color, and category characteristics to your uploaded image")
+                                        else:
+                                            st.info(f"🎯 **Recommended because:** This item matches your search criteria based on AI analysis")
+                                        
                                         # Guardrails check
-                                        st.write("**Compatibility Check:**")
+                                        st.write("**Why This is a Good Match:**")
                                         try:
-                                            # Note: guardrails check might need image_base64 which may not be available
-                                            st.info("ℹ️ Compatibility validation available for items with images")
+                                            # Run compatibility validation if we have the uploaded image
+                                            if 'img_str' in locals():
+                                                from guardrails import check_match
+                                                
+                                                # Get the suggested item image as base64
+                                                with open(image_path, "rb") as img_file:
+                                                    suggested_img_base64 = base64.b64encode(img_file.read()).decode()
+                                                
+                                                # Run the compatibility check
+                                                compatibility_result = check_match(img_str, suggested_img_base64)
+                                                
+                                                try:
+                                                    # Parse the JSON response - import json at the top level
+                                                    compatibility_data = json.loads(compatibility_result)
+                                                    
+                                                    if compatibility_data.get('answer') == 'yes':
+                                                        st.success(f"✅ **Compatible!** {compatibility_data.get('reason', 'These items work well together!')}")
+                                                    else:
+                                                        st.warning(f"⚠️ **Limited compatibility:** {compatibility_data.get('reason', 'Consider alternatives')}")
+                                                except:
+                                                    st.info(f"ℹ️ {compatibility_result}")
+                                            else:
+                                                st.info("ℹ️ Upload an image to see compatibility analysis")
                                         except Exception as e:
-                                            st.info("ℹ️ Compatibility check not available")
+                                            st.info(f"ℹ️ Compatibility analysis: {str(e)}")
                         else:
                             st.warning("❌ No matching items found. Try uploading a different image.")
                             
