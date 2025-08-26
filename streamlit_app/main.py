@@ -10,6 +10,10 @@ import json
 import base64
 from PIL import Image
 import io
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add the src directory to the path for imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -79,7 +83,7 @@ def main():
     if uploaded_file is not None:
         # Display the uploaded image
         image = Image.open(uploaded_file)
-        st.image(image, caption="Uploaded Image", use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_container_width=True)
         
         # Convert image to base64 for analysis
         buffered = io.BytesIO()
