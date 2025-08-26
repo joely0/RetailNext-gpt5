@@ -14,8 +14,8 @@ A multimodal fashion recommendation system that analyzes clothing images and sug
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/RetailNext00.git
-cd RetailNext00
+git clone https://github.com/yourusername/RetailNext-gpt5.git
+cd RetailNext-gpt5
 
 # Set up virtual environment
 python -m venv .venv
@@ -24,8 +24,10 @@ source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your OpenAI API key
-export OPENAI_API_KEY="your-api-key-here"
+# Set up environment variables
+cp env.example .env
+# Edit .env file with your OpenAI API key
+# Or set directly: export OPENAI_API_KEY="your-api-key-here"
 
 # Run the Streamlit app
 python run_streamlit.py
@@ -34,7 +36,7 @@ python run_streamlit.py
 ## 📁 Project Structure
 
 ```
-RetailNext00/
+RetailNext-gpt5/
 ├── requirements.txt          # Python dependencies
 ├── src/                     # Core AI modules
 │   ├── analysis.py          # Image analysis with GPT-5
