@@ -29,7 +29,7 @@ from data_loader import load_clothing_data
 
 # Page configuration
 st.set_page_config(
-    page_title="RetailNext Fashion Recommender",
+    page_title="RetailNext Clothing Matchmaker",
     page_icon="👔",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -45,12 +45,7 @@ st.markdown("""
         text-align: center;
         margin-bottom: 2rem;
     }
-    .upload-section {
-        background-color: #f0f2f6;
-        padding: 2rem;
-        border-radius: 10px;
-        margin: 1rem 0;
-    }
+
     .results-section {
         background-color: #ffffff;
         padding: 1.5rem;
@@ -62,7 +57,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def main():
-    st.markdown('<h1 class="main-header">👔 RetailNext Fashion Recommender</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">RetailNext Clothing Matchmaker</h1>', unsafe_allow_html=True)
     
     st.markdown("""
     **Upload an image of a clothing item to get AI-powered fashion recommendations!**
@@ -71,15 +66,12 @@ def main():
     """)
     
     # File uploader
-    with st.container():
-        st.markdown('<div class="upload-section">', unsafe_allow_html=True)
-        st.subheader("📸 Upload Your Clothing Item")
-        uploaded_file = st.file_uploader(
-            "Choose an image file",
-            type=['jpg', 'jpeg', 'png'],
-            help="Upload a clear image of the clothing item you want to match"
-        )
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.subheader("📸 Upload Your Clothing Item")
+    uploaded_file = st.file_uploader(
+        "Choose an image file",
+        type=['jpg', 'jpeg', 'png'],
+        help="Upload a clear image of the clothing item you want to match"
+    )
     
     if uploaded_file is not None:
         # Display the uploaded image
@@ -188,8 +180,7 @@ def main():
                                         elif 'score' in match:
                                             st.write(f"**Match Score:** {match.get('score', 'N/A'):.3f}")
                                             st.info(f"🎯 **Recommended because:** This item has similar style, color, and category characteristics to your uploaded image")
-                                        else:
-                                            st.info(f"🎯 **Recommended because:** This item matches your search criteria based on AI analysis")
+
                                         
                                         # Guardrails check
                                         st.write("**Why This is a Good Match:**")
@@ -234,17 +225,14 @@ def main():
     with st.sidebar:
         st.header("ℹ️ About This System")
         st.markdown("""
-        **RetailNext Fashion Recommender** uses advanced AI to:
+        **RetailNext Clothing Matchmaker**
         
         - 🧠 **Analyze clothing images** with GPT-5
         - 🔍 **Find similar items** using semantic search
         - ✅ **Validate compatibility** with AI guardrails
         - 🎯 **Provide personalized recommendations**
         
-        **Perfect for:**
-        - Fashion retailers
-        - Personal styling
-        - Outfit coordination
+
         """)
         
         st.header("🔧 Technical Details")
@@ -255,17 +243,7 @@ def main():
         - **Validation:** AI-powered guardrails
         """)
         
-        st.header("📸 Images")
-        st.markdown("""
-        **Image Coverage:** You have ~100 sample images for 1000 catalog items.
-        
-        **How it works:** 
-        - Catalog item ID 9934 → Looks for 9934.jpg
-        - If image exists → Shows actual product photo
-        - If image missing → Shows placeholder with ID
-        
-        **Note:** Most catalog items won't have images since you have limited sample data.
-        """)
+
 
 if __name__ == "__main__":
     main()
