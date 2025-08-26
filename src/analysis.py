@@ -27,15 +27,28 @@ def analyze_image(image_base64, subcategories):
                 {
                 "type": "text",
                 "text": f"""Given an image of an item of clothing, analyze the item and generate a JSON output with the following fields: "items", "category", and "gender".
-                           Use your understanding of fashion trends, styles, and gender preferences to provide accurate and relevant suggestions for how to complete the outfit.
-                           The items field should be a list of exactly 3 items that would go well with the item in the picture. Each item should represent a title of an item of clothing that contains the style, color, and gender of the item.
-                           The category needs to be chosen between the types in this list: {subcategories}.
-                           You have to choose between the genders in this list: [Men, Women, Boys, Girls, Unisex]
-                           Do not include the description of the item in the picture. Do not include the ```json ``` tag in the output.
 
-                           Example Input: An image representing a black leather jacket.
+                           ANALYSIS TASK:
+                           - Identify what clothing item is in the uploaded image
+                           - Determine the category from this list: {subcategories}
+                           - Determine the gender from this list: [Men, Women, Boys, Girls, Unisex]
 
+                           RECOMMENDATION TASK:
+                           - Generate exactly 3 complementary clothing items that would complete an outfit with the uploaded item
+                           - Each recommended item should include style, color, and gender
+                           - These are suggestions for what would go well together, not items detected in the image
+
+                           OUTPUT FORMAT:
+                           {{
+                             "items": ["Item 1 description", "Item 2 description", "Item 3 description"],
+                             "category": "Category of uploaded item",
+                             "gender": "Gender of uploaded item"
+                           }}
+
+                           Example Input: An image of a black leather jacket
                            Example Output: {{"items": ["Fitted White Women's T-shirt", "White Canvas Sneakers", "Women's Black Skinny Jeans"], "category": "Jackets", "gender": "Women"}}
+
+                           Do not include the ```json ``` tag in the output.
                            """,
                 },
                 {
