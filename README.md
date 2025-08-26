@@ -1,4 +1,4 @@
-# RetailNext00 - AI Fashion Recommendation System
+# RetailNext - Clothing Matchmaker
 
 A multimodal fashion recommendation system that analyzes clothing images and suggests matching outfit items using OpenAI's latest GPT-5 API and embedding-based similarity search.
 
