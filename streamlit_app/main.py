@@ -199,7 +199,11 @@ def main():
                                         # Get the corresponding match data for this card
                                         current_match = matches[i]
                                         image_filename = f"{current_match.get('id', 'unknown')}.jpg"
-                                        image_path = f"../data/sample_clothes/sample_images/{image_filename}"
+                                        
+                                        # Use absolute path that works both locally and on Streamlit Cloud
+                                        current_dir = os.path.dirname(os.path.abspath(__file__))
+                                        project_root = os.path.dirname(current_dir)
+                                        image_path = os.path.join(project_root, "data", "sample_clothes", "sample_images", image_filename)
                                         
                                         if os.path.exists(image_path):
                                             st.image(image_path, caption=f"ID: {current_match.get('id', 'N/A')}", width=210)
@@ -228,6 +232,7 @@ def main():
                                             from guardrails import check_match
                                             
                                             # Get the suggested item image as base64
+                                            # image_path is already defined above with absolute path
                                             with open(image_path, "rb") as img_file:
                                                 suggested_img_base64 = base64.b64encode(img_file.read()).decode()
                                             
