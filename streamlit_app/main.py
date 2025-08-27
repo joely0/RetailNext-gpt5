@@ -171,7 +171,7 @@ def main():
                             for i, match in enumerate(matches[:5]):
                                 card_content = f"""
                                 <div class='rnx-card'>
-                                    <h3>{match.get('productDisplayName', 'Unknown Item')}</h3>
+                                    <h3 style="background: linear-gradient(135deg, #7c5cff, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; font-size: 18px; margin-bottom: 12px;">{match.get('productDisplayName', 'Unknown Item')}</h3>
                                     <p class='rnx-muted'>
                                         <strong>Category:</strong> {match.get('articleType', 'N/A')}<br/>
                                         <strong>Gender:</strong> {match.get('gender', 'N/A')}<br/>
