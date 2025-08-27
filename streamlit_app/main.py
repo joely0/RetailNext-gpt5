@@ -91,6 +91,11 @@ def main():
         </style>
         """, unsafe_allow_html=True)
         
+        # Anchor point for the Analyze & Find Matches button
+        st.markdown('<div id="analyze-button"></div>', unsafe_allow_html=True)
+        
+
+        
         if st.button("🔍 Analyze & Find Matches", type="primary"):
             with st.spinner("Analyzing your image with GPT-5..."):
                 try:
