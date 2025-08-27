@@ -219,7 +219,6 @@ def main():
                                     
                                     # Guardrails compatibility check
                                     st.markdown("<div class='rnx-card'>", unsafe_allow_html=True)
-                                    st.markdown("<h4>Compatibility Analysis</h4>", unsafe_allow_html=True)
                                     try:
                                         if 'img_str' in locals():
                                             from guardrails import check_match
@@ -235,7 +234,18 @@ def main():
                                                 compatibility_data = json.loads(compatibility_result)
                                                 
                                                 if compatibility_data.get('answer') == 'yes':
-                                                    st.success(f"✅ **Compatible!** {compatibility_data.get('reason', 'These items work well together!')}")
+                                                    st.markdown(f"""
+                                                    <div style="
+                                                        background: #5eead4;
+                                                        color: #0b0b10;
+                                                        padding: 12px 16px;
+                                                        border-radius: 12px;
+                                                        margin: 8px 0;
+                                                        box-shadow: 0 4px 15px rgba(94, 234, 212, 0.3);
+                                                    ">
+                                                        <strong>Compatible!</strong> {compatibility_data.get('reason', 'These items work well together!')}
+                                                    </div>
+                                                    """, unsafe_allow_html=True)
                                                 else:
                                                     st.warning(f"⚠️ **Limited compatibility:** {compatibility_data.get('reason', 'Consider alternatives')}")
                                             except:
