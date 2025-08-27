@@ -102,22 +102,25 @@ def main():
                         analysis_data = json.loads(analysis)
                         st.success("✅ Image analysis complete!")
                         
-                        # Display what was detected in the uploaded image
-                        section("Item Analysis", "Here's what our AI detected in your image:")
-                        st.markdown("<div class='rnx-card'>", unsafe_allow_html=True)
-                        if 'category' in analysis_data:
-                            st.write(f"**Item Category:** {analysis_data['category']}")
-                        if 'gender' in analysis_data:
-                            st.write(f"**Target Gender:** {analysis_data['gender']}")
-                        st.markdown("</div>", unsafe_allow_html=True)
+                        # Display what was detected in the uploaded image using the new result box
+                        from ui_skin import result_box
                         
-                        # Display AI style recommendations
-                        if 'items' in analysis_data:
-                            section("AI Style Recommendations", "Based on your uploaded item, here are complementary pieces that would complete the outfit:")
-                            st.markdown("<div class='rnx-card'>", unsafe_allow_html=True)
-                            for i, item in enumerate(analysis_data['items'], 1):
-                                st.write(f"{i}. {item}")
-                            st.markdown("</div>", unsafe_allow_html=True)
+                        # Create fields for the result box
+                        fields = {}
+                        if 'category' in analysis_data:
+                            fields['Item Category'] = analysis_data['category']
+                        if 'gender' in analysis_data:
+                            fields['Target Gender'] = analysis_data['gender']
+                        
+                        # Get AI style recommendations
+                        matches = analysis_data.get('items', [])
+                        
+                        # Display everything in one beautiful result box
+                        result_box(
+                            title="Item Analysis Results",
+                            fields=fields,
+                            matches=matches
+                        )
                         
                         # Find matching items from catalog
                         section("Finding Similar Items", "Searching our catalog for items that match the AI recommendations...")
@@ -166,7 +169,7 @@ def main():
                                         # Get the corresponding match data for this card
                                         current_match = matches[i]
                                         image_filename = f"{current_match.get('id', 'unknown')}.jpg"
-                                        image_path = f"../data/sample_clothes/sample_images/{image_filename}"
+                                        image_path = f"data/sample_clothes/sample_images/{image_filename}"
                                         
                                         if os.path.exists(image_path):
                                             st.image(image_path, caption=f"ID: {current_match.get('id', 'N/A')}", width=210)
