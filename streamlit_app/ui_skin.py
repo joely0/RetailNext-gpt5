@@ -24,7 +24,7 @@ Everything runs in vanilla Streamlit. No external libs required.
 """
 from __future__ import annotations
 import streamlit as st
-from typing import Iterable, Optional
+from typing import Iterable, Optional, Dict
 from streamlit.components.v1 import html as html_component
 
 # --- Page + global CSS -------------------------------------------------------
@@ -79,7 +79,7 @@ body, .stMarkdown, .stText, .stTextInput, .stButton button{color:var(--text)!imp
 .rnx-footer-inner{max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; padding:0 16px}
 
 /* Hero */
-.rnx-hero{padding:84px 0 40px}
+.rnx-hero{padding:40px 0 20px}
 .rnx-hero-grid{display:grid; grid-template-columns:1.2fr; gap:30px; align-items:center}
 @media(min-width:1024px){.rnx-hero-grid{grid-template-columns:1.2fr .8fr}}
 .rnx-eyebrow{display:inline-flex; align-items:center; gap:8px; color:var(--accent2); font-weight:600; font-size:13px; letter-spacing:.6px; text-transform:uppercase}
@@ -176,21 +176,7 @@ def hero(title: str, subtitle: str = "", eyebrow: str = "AI Outfit Assistant", v
                   <h1 style='font-size:clamp(34px,5vw,56px); line-height:1.05; margin:12px 0 10px; text-align: left;'>
                     Turn product images into <span style="background: linear-gradient(135deg, #7c5cff, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold;">personalised outfit ideas</span>
                   </h1>
-                    <p class='rnx-lead' style='text-align: left;'>{subtitle}</p>
-                  <div style='text-align: left; margin-top: 24px;'>
-                    <a href="#" style="
-                        display:inline-block;
-                        background: linear-gradient(135deg, #7c5cff, #8b5cf6);
-                        color: white;
-                        padding: 10px 20px;
-                        border-radius: 999px;
-                        text-decoration: none;
-                        box-shadow: 0 10px 30px rgba(0,0,0,.35);
-                        font-weight: 600;
-                    ">
-                        Start Now
-                    </a>
-                  </div>
+                  <p class='rnx-lead' style='text-align: left;'>{subtitle}</p>
                 </div>
               </div>
             </div>
@@ -232,6 +218,97 @@ def steps(step_text: Iterable[str]):
 
 def architecture_svg(svg_html: str):
     st.markdown(f"<div class='rnx-card rnx-reveal' style='overflow:auto'>{svg_html}</div>", unsafe_allow_html=True)
+
+
+# --- Result Box Component ---------------------------------------------------
+
+def _inject_result_box_css():
+    # Only inject once per session
+    if st.session_state.get("_rnx_result_css_injected"):
+        return
+    st.session_state["_rnx_result_css_injected"] = True
+
+    st.markdown(
+        """
+        <style>
+          :root {
+            --rnx-text: #e6e7ee;
+            --rnx-muted: #b6b7c3;
+            --rnx-card: #151522;
+            --rnx-border: rgba(255,255,255,.10);
+            --rnx-shadow: 0 10px 30px rgba(0,0,0,.35);
+            --rnx-accent-2: #5eead4;
+            --rnx-radius: 18px;
+          }
+          .rnx-result-box {
+            background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+            border: 1px solid var(--rnx-border);
+            border-radius: var(--rnx-radius);
+            padding: 20px;
+            margin-top: 16px;
+            box-shadow: var(--rnx-shadow);
+          }
+          .rnx-result-box h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            color: var(--rnx-accent-2);
+          }
+          .rnx-kv { 
+            margin: 6px 0; 
+            color: var(--rnx-muted);
+          }
+          .rnx-kv strong { 
+            color: var(--rnx-text);
+          }
+          .rnx-chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+          .rnx-chip {
+            padding: 6px 10px;
+            border: 1px solid var(--rnx-border);
+            border-radius: 999px;
+            background: #0f0f16;
+            color: var(--rnx-text);
+            font-size: 13px;
+          }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+def result_box(
+    title: str = "Item Analysis Results",
+    fields: Dict[str, str] | None = None,
+    matches: Iterable[str] | None = None,
+):
+    """
+    Renders a themed results box.
+    - title: heading at the top of the box
+    - fields: dict of label -> value (e.g., {"Category": "Shirt", "Colour": "Black"})
+    - matches: iterable of suggested match strings to render as chips
+    """
+    _inject_result_box_css()
+
+    # Build the key/values HTML
+    kv_html = ""
+    if fields:
+        for k, v in fields.items():
+            kv_html += f"<p class='rnx-kv'><strong>{k}:</strong> {v}</p>"
+
+    chips_html = ""
+    if matches:
+        chips = "".join([f"<span class='rnx-chip'>{m}</span>" for m in matches])
+        chips_html = f"<div class='rnx-chips'>{chips}</div>"
+
+    st.markdown(
+        f"""
+        <div class="rnx-result-box">
+          <h3>{title}</h3>
+          {kv_html}
+          {'<p class="rnx-kv"><strong>Suggested Matches:</strong></p>' if matches else ''}
+          {chips_html}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 # --- Example THEME file for .streamlit/config.toml ---------------------------
 THEME_TOML = """

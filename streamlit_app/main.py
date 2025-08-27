@@ -222,8 +222,7 @@ def main():
                                     except Exception as e:
                                         st.error(f"Error loading image: {e}")
                                     
-                                    # Guardrails compatibility check
-                                    st.markdown("<div class='rnx-card'>", unsafe_allow_html=True)
+                                    # Guardrails compatibility check - only show compatible items
                                     try:
                                         if 'img_str' in locals():
                                             from guardrails import check_match
@@ -238,7 +237,11 @@ def main():
                                             try:
                                                 compatibility_data = json.loads(compatibility_result)
                                                 
+                                                # Only display this item if it's compatible
                                                 if compatibility_data.get('answer') == 'yes':
+                                                    st.markdown("<div class='rnx-card'>", unsafe_allow_html=True)
+                                                    
+                                                    # Show compatibility analysis
                                                     st.markdown(f"""
                                                     <div style="
                                                         background: #5eead4;
@@ -253,47 +256,49 @@ def main():
                                                         {compatibility_data.get('reason', 'These items work well together!')}
                                                     </div>
                                                     """, unsafe_allow_html=True)
-                                                else:
-                                                    st.warning(f"⚠️ **Limited compatibility:** {compatibility_data.get('reason', 'Consider alternatives')}")
+                                                    
+                                                    # Action buttons for compatible items
+                                                    st.markdown("""
+                                                    <div style="display: flex; gap: 12px; margin-top: 16px; justify-content: center; width: 100%; max-width: 280px; margin-left: 0;">
+                                                        <a href="#" style="
+                                                            display: inline-block;
+                                                            background: linear-gradient(135deg, #7c5cff, #8b5cf6);
+                                                            color: white;
+                                                            padding: 10px 20px;
+                                                            border-radius: 999px;
+                                                            text-decoration: none;
+                                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+                                                            font-weight: 600;
+                                                            font-size: 14px;
+                                                        ">
+                                                            Find in Store
+                                                        </a>
+                                                        <a href="#" style="
+                                                            display: inline-block;
+                                                            background: linear-gradient(135deg, #5eead4, #06b6d4);
+                                                            color: white;
+                                                            padding: 10px 20px;
+                                                            border-radius: 999px;
+                                                            text-decoration: none;
+                                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+                                                            font-weight: 600;
+                                                            font-size: 14px;
+                                                        ">
+                                                            Buy Now
+                                                        </a>
+                                                    </div>
+                                                    """, unsafe_allow_html=True)
+                                                    
+                                                    st.markdown("</div>", unsafe_allow_html=True)
+                                                # If not compatible, don't show anything - item is effectively hidden
                                             except:
-                                                st.info(f"ℹ️ {compatibility_result}")
+                                                # If compatibility check fails, don't show the item
+                                                pass
                                         else:
                                             st.info("ℹ️ Upload an image to see compatibility analysis")
                                     except Exception as e:
-                                        st.info(f"ℹ️ Compatibility analysis: {str(e)}")
-                                    st.markdown("</div>", unsafe_allow_html=True)
-                                    
-                                    # Action buttons at the bottom of compatibility
-                                    st.markdown("""
-                                    <div style="display: flex; gap: 12px; margin-top: 16px; justify-content: center; width: 100%; max-width: 280px; margin-left: 0;">
-                                        <a href="#" style="
-                                            display: inline-block;
-                                            background: linear-gradient(135deg, #7c5cff, #8b5cf6);
-                                            color: white;
-                                            padding: 10px 20px;
-                                            border-radius: 999px;
-                                            text-decoration: none;
-                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
-                                            font-weight: 600;
-                                            font-size: 14px;
-                                        ">
-                                            Find in Store
-                                        </a>
-                                        <a href="#" style="
-                                            display: inline-block;
-                                            background: linear-gradient(135deg, #5eead4, #06b6d4);
-                                            color: white;
-                                            padding: 10px 20px;
-                                            border-radius: 999px;
-                                            text-decoration: none;
-                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
-                                            font-weight: 600;
-                                            font-size: 14px;
-                                        ">
-                                            Buy Now
-                                        </a>
-                                    </div>
-                                    """, unsafe_allow_html=True)
+                                        # If there's an error, don't show the item
+                                        pass
                         else:
                             st.warning("❌ No matching items found. Try uploading a different image.")
                             
