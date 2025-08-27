@@ -269,38 +269,23 @@ def main():
                     st.info("Please try again with a different image.")
     
     # How it works section
-    section("How It Works", "Our AI-powered system analyzes your clothing and finds perfect matches in four simple steps:", anchor="how")
+    st.markdown("<h2 style='font-size:clamp(24px,3vw,34px); margin:0 0 16px; color: #5eead4;'>How It Works</h2>", unsafe_allow_html=True)
+    st.markdown("<p class='rnx-muted' style='max-width:740px; margin-bottom: 20px;'>Get outfit recommendations in four simple steps:</p>", unsafe_allow_html=True)
     
     # Simple numbered steps
     st.markdown("### 1. Upload your item")
-    st.markdown("Provide a clear image of the clothing you want to match.")
+    st.markdown("Upload a clear image of the clothing you want to match.")
     
     st.markdown("### 2. AI analysis")
-    st.markdown("GPT-5 analyzes style, color, and category attributes.")
+    st.markdown("Our AI analyzes style, color, and category details.")
     
     st.markdown("### 3. Smart matching")
-    st.markdown("Our system finds complementary items using semantic search.")
+    st.markdown("We find complementary items from our catalog.")
     
     st.markdown("### 4. Get recommendations")
-    st.markdown("Receive curated outfit suggestions with compatibility validation.")
+    st.markdown("Receive outfit suggestions with compatibility notes.")
     
-    # Features section
-    section("Key Features", "What makes RetailNext special:", anchor="features")
-    cards([
-        ("AI Image Analysis", "GPT-5 Vision analyzes clothing images to understand style, color, and category."),
-        ("Semantic Search", "Find similar items using OpenAI embeddings and vector similarity."),
-        ("Smart Filtering", "Get complementary items from different categories for complete outfits."),
-        ("AI Validation", "Guardrails system validates outfit compatibility with detailed reasoning."),
-    ], columns=2)
-    
-    # Technical details section
-    section("Technical Details", "Built with cutting-edge AI technology:", anchor="tech")
-    cards([
-        ("GPT-5 Vision", "Latest OpenAI model for advanced image understanding."),
-        ("Text Embeddings", "text-embedding-3-large for semantic similarity search."),
-        ("Vector Database", "Fast cosine similarity search over product catalog."),
-        ("AI Guardrails", "Intelligent compatibility validation system."),
-    ], columns=2)
+
     
     # Render the footer
     render_footer()
