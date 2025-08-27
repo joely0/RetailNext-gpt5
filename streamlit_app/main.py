@@ -257,6 +257,38 @@ def main():
                                     except Exception as e:
                                         st.info(f"ℹ️ Compatibility analysis: {str(e)}")
                                     st.markdown("</div>", unsafe_allow_html=True)
+                                    
+                                    # Action buttons at the bottom of compatibility
+                                    st.markdown("""
+                                    <div style="display: flex; gap: 12px; margin-top: 16px; justify-content: center; width: 100%; max-width: 280px; margin-left: 0;">
+                                        <a href="#" style="
+                                            display: inline-block;
+                                            background: linear-gradient(135deg, #7c5cff, #8b5cf6);
+                                            color: white;
+                                            padding: 10px 20px;
+                                            border-radius: 999px;
+                                            text-decoration: none;
+                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+                                            font-weight: 600;
+                                            font-size: 14px;
+                                        ">
+                                            Find in Store
+                                        </a>
+                                        <a href="#" style="
+                                            display: inline-block;
+                                            background: linear-gradient(135deg, #5eead4, #06b6d4);
+                                            color: white;
+                                            padding: 10px 20px;
+                                            border-radius: 999px;
+                                            text-decoration: none;
+                                            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+                                            font-weight: 600;
+                                            font-size: 14px;
+                                        ">
+                                            Buy Now
+                                        </a>
+                                    </div>
+                                    """, unsafe_allow_html=True)
                         else:
                             st.warning("❌ No matching items found. Try uploading a different image.")
                             
