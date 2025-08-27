@@ -30,7 +30,7 @@ from data_loader import load_clothing_data
 # Page configuration
 st.set_page_config(
     page_title="RetailNext Clothing Matchmaker",
-    page_icon="👔",
+    page_icon="data/website/favicon.ico",
     layout="wide",
     initial_sidebar_state="expanded"
 )
