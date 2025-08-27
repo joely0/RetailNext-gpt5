@@ -243,7 +243,7 @@ def main():
                                                         margin: 8px 0;
                                                         box-shadow: 0 4px 15px rgba(94, 234, 212, 0.3);
                                                     ">
-                                                        <strong>Compatible!</strong> {compatibility_data.get('reason', 'These items work well together!')}
+                                                        {compatibility_data.get('reason', 'These items work well together!')}
                                                     </div>
                                                     """, unsafe_allow_html=True)
                                                 else:
