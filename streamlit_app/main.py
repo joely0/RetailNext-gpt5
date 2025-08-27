@@ -166,7 +166,7 @@ def main():
                                         # Get the corresponding match data for this card
                                         current_match = matches[i]
                                         image_filename = f"{current_match.get('id', 'unknown')}.jpg"
-                                        image_path = f"data/sample_clothes/sample_images/{image_filename}"
+                                        image_path = f"../data/sample_clothes/sample_images/{image_filename}"
                                         
                                         if os.path.exists(image_path):
                                             st.image(image_path, caption=f"ID: {current_match.get('id', 'N/A')}", width=210)
