@@ -300,6 +300,9 @@ def main():
                     st.error(f"❌ Error during analysis: {e}")
                     st.info("Please try again with a different image.")
     
+    # Add spacing between compatibility section and How It Works
+    st.markdown("<div style='margin: 60px 0;'></div>", unsafe_allow_html=True)
+    
     # How it works section
     st.markdown("<h2 style='font-size:clamp(24px,3vw,34px); margin:0 0 16px; color: #5eead4;'>How It Works</h2>", unsafe_allow_html=True)
     st.markdown("<p class='rnx-muted' style='max-width:740px; margin-bottom: 20px;'>Get outfit recommendations in four simple steps:</p>", unsafe_allow_html=True)
