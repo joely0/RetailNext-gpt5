@@ -136,7 +136,14 @@ def main():
                         )
                         
                         # Find matching items from catalog
-                        section("Finding Similar Items", "Searching our catalog for items that match the AI recommendations...")
+                        from ui_skin import _inject_result_box_css
+                        _inject_result_box_css()
+                        st.markdown("""
+                        <div class="rnx-result-box">
+                          <h3>Finding Similar Items</h3>
+                          <p class="rnx-kv">Searching our catalog for items that match the AI recommendations...</p>
+                        </div>
+                        """, unsafe_allow_html=True)
                         
                         # Load clothing data
                         try:
@@ -152,7 +159,12 @@ def main():
                             matches = []
                         
                         if matches and len(matches) > 0:
-                            section("Catalog Matches Found", f"Found {len(matches)} items in our catalog that match the AI recommendations!")
+                            st.markdown(f"""
+                            <div class="rnx-result-box">
+                              <h3>Catalog Matches Found</h3>
+                              <p class="rnx-kv">Found {len(matches)} items in our catalog that match</p>
+                            </div>
+                            """, unsafe_allow_html=True)
                             
                             # Display matches in cards
                             match_cards = []
