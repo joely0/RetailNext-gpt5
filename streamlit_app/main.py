@@ -100,7 +100,20 @@ def main():
                     # Parse the analysis
                     try:
                         analysis_data = json.loads(analysis)
-                        st.success("✅ Image analysis complete!")
+                        st.markdown("""
+                        <div style="
+                            background: linear-gradient(135deg, #7c5cff, #8b5cf6);
+                            color: white;
+                            padding: 12px 20px;
+                            border-radius: 12px;
+                            text-align: center;
+                            font-weight: 600;
+                            margin: 20px 0;
+                            box-shadow: 0 8px 25px rgba(124, 92, 255, 0.3);
+                        ">
+                            Image analysis complete!
+                        </div>
+                        """, unsafe_allow_html=True)
                         
                         # Display what was detected in the uploaded image using the new result box
                         from ui_skin import result_box
@@ -232,13 +245,20 @@ def main():
                     st.info("Please try again with a different image.")
     
     # How it works section
-    section("How It Works", "Our AI-powered system analyzes your clothing and finds perfect matches in three simple steps:", anchor="how")
-    steps([
-        "<strong>Upload your item</strong><br/><span class='rnx-muted'>Provide a clear image of the clothing you want to match.</span>",
-        "<strong>AI analysis</strong><br/><span class='rnx-muted'>GPT-5 analyzes style, color, and category attributes.</span>",
-        "<strong>Smart matching</strong><br/><span class='rnx-muted'>Our system finds complementary items using semantic search.</span>",
-        "<strong>Get recommendations</strong><br/><span class='rnx-muted'>Receive curated outfit suggestions with compatibility validation.</span>",
-    ])
+    section("How It Works", "Our AI-powered system analyzes your clothing and finds perfect matches in four simple steps:", anchor="how")
+    
+    # Simple numbered steps
+    st.markdown("### 1. Upload your item")
+    st.markdown("Provide a clear image of the clothing you want to match.")
+    
+    st.markdown("### 2. AI analysis")
+    st.markdown("GPT-5 analyzes style, color, and category attributes.")
+    
+    st.markdown("### 3. Smart matching")
+    st.markdown("Our system finds complementary items using semantic search.")
+    
+    st.markdown("### 4. Get recommendations")
+    st.markdown("Receive curated outfit suggestions with compatibility validation.")
     
     # Features section
     section("Key Features", "What makes RetailNext special:", anchor="features")
